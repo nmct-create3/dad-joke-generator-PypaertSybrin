@@ -34,7 +34,7 @@
     --global-color-neutral-900: #222222;
 
     /* global page settings */
-    --global-page-backgroundColor: var(--global-color-neutral-000);
+    --global-page-backgroundColor: var(--global-color-neutral-050);
     --global-page-color: var(--global-color-neutral-900);
     --global-selection-backgroundColor: var(--global-color-primary-100);
 
@@ -70,12 +70,17 @@
     /* forms */
 }
 
-@media (prefers-color-scheme: dark) {
+@keyframes shimmer{
+    100%{
+        transform: translateX(100%);
+    }
+}
+/* @media (prefers-color-scheme: dark) {
     :root {
         --global-page-color: var(--global-color-neutral-050);
         --global-page-backgroundColor: var(--global-color-neutral-900);
     }
-}
+} */
 
 /*------------------------------------*\
 #GENERIC
@@ -288,7 +293,7 @@ input::placeholder {
 .o-container {
     margin-left: auto;
     margin-right: auto;
-    max-width: 79.5em;
+    max-width: 48rem;
     /* 79.5 * 16px = 1272 */
     width: 100%;
 }
@@ -506,12 +511,90 @@ input::placeholder {
 /*------------------------------------*\
 #COMPONENTS
 \*------------------------------------*/
+.c-app{
+    min-height: 100vh;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+}
+.c-card{
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+.c-app__title{
+    border-bottom: 1px solid var(--global-borderColor);
+    margin-top: 1.5rem;
+}
+.c-app__body{
+    padding: 4rem 3rem;
+    border-bottom: 1px solid var(--global-borderColor);
+}
+.c-app__joke{
+    margin-bottom: var(--global-whitespace-xxl);
+    font-size: 2rem;
+    line-height: 1.1;
+}
+.c-loading{
+    display: flex;
+    gap: .2rem;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+.c-loading__placeholder{
+    position: relative;
+    display: block;
+    width: 40%;
+    height: 2rem;
+    border-radius: 0.2rem;
+    background-color: var(--global-color-neutral-100);
+}
+.c-loading__placeholder::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    opacity: 0.5;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+        90deg, 
+        transparent 20%,
+        var(--global-color-primary-500) 49%,
+        var(--global-color-primary-500) 51%,
+        transparent 80%
+    );
+    animation: shimmer 2s infinite;
+}
+.c-loading__placeholder--half{
+    width: 50%;
+}
+.c-loading__placeholder--full{
+    width: 100%;
+}
+.c-app__button{
+    background-color: var(--global-color-primary-500);
+    color: var(--global-color-primary-000);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+}
+.c-app__footer{
+    margin-top: 1.5rem;
+}
 
 
 
 /*------------------------------------*\
 #UTILITIES
 \*------------------------------------*/
+
+.u-hidden{
+    display: none;
+}
 
 /*
     Utilities: color
